@@ -98,7 +98,6 @@ describe ('checkup', () => {
     });
     it('returns "I need a walk" if fitness <= 3', () => {
         pet.fitness = 2;
-        pet.checkup()
         expect(pet.checkup()).toEqual("I need a walk");
     });
     it('returns "I am hungry" if hunger >= 5', () => {
@@ -118,6 +117,17 @@ describe ('checkup', () => {
     it('throws an error if the pet is not alive', () => {
         pet.hunger = 10;
         expect(() => pet.checkup()).toThrow('Your pet is no longer alive');
-    });
-});
+    })
+})
 
+describe ('haveBaby', () => {
+    let pet;
+    beforeEach(() => {
+        pet = new Pet ('Fido');
+    });
+    it('the pet has a baby which is added to its children array', () => {
+        pet.haveBaby('Whiskers');
+        expect(pet.children).toHaveLength(1);
+        expect(pet.children[0]).toHaveProperty('name', 'Whiskers');
+    })
+});
